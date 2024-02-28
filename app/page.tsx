@@ -7,6 +7,14 @@ import { useQuery } from "@apollo/client";
 export default function Home() {
   const { data } = useQuery<ShipsQuery>(apiCalls.queries.ships, {
     fetchPolicy: "cache-and-network",
+    variables: {
+      input: {
+        pagination: {
+          limit: 50,
+          offset: 1
+        }
+      }
+    }
   });
 
   return (
