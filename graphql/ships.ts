@@ -4,6 +4,7 @@ const ships = gql`
   query Ships($input: ShipsInput!) {
     ships(input: $input) {
       name
+      image
     }
   }
 `;
