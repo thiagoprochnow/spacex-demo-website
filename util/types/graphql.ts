@@ -29,6 +29,17 @@ export type BlockAppInput = {
   deviceBrand: Scalars['String']['input'];
 };
 
+export type Mission = {
+  __typename?: 'Mission';
+  id: Scalars['ID']['output'];
+  name?: Maybe<Scalars['String']['output']>;
+  shipId?: Maybe<Scalars['String']['output']>;
+};
+
+export type MissionsInput = {
+  shipId: Scalars['String']['input'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addUser?: Maybe<User>;
@@ -42,6 +53,7 @@ export type PaginationInput = {
 export type Query = {
   __typename?: 'Query';
   blockApp: BlockApp;
+  missions?: Maybe<Array<Mission>>;
   ships?: Maybe<Array<Ship>>;
   user: User;
 };
@@ -49,6 +61,11 @@ export type Query = {
 
 export type QueryBlockAppArgs = {
   input: BlockAppInput;
+};
+
+
+export type QueryMissionsArgs = {
+  input: MissionsInput;
 };
 
 
@@ -90,12 +107,20 @@ export type UserInput = {
   userId: Scalars['String']['input'];
 };
 
+export type MissionsQueryVariables = Exact<{
+  input: MissionsInput;
+}>;
+
+
+export type MissionsQuery = { __typename?: 'Query', missions?: Array<{ __typename?: 'Mission', name?: string | null }> | null };
+
 export type ShipsQueryVariables = Exact<{
   input: ShipsInput;
 }>;
 
 
-export type ShipsQuery = { __typename?: 'Query', ships?: Array<{ __typename?: 'Ship', name?: string | null, image?: string | null }> | null };
+export type ShipsQuery = { __typename?: 'Query', ships?: Array<{ __typename?: 'Ship', id: string, name?: string | null, image?: string | null }> | null };
 
 
-export const ShipsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Ships"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ShipsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ships"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"image"}}]}}]}}]} as unknown as DocumentNode<ShipsQuery, ShipsQueryVariables>;
+export const MissionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Missions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"MissionsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"missions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<MissionsQuery, MissionsQueryVariables>;
+export const ShipsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Ships"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ShipsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ships"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"image"}}]}}]}}]} as unknown as DocumentNode<ShipsQuery, ShipsQueryVariables>;

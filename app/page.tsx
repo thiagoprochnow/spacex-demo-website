@@ -4,7 +4,7 @@ import apiCalls from "@/graphql";
 import { ShipsQuery } from "@/util/types/graphql";
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
-import { ShipDetails } from "./components/ShipDetails";
+import { ShipDetails } from "./components/Ships/ShipDetails";
 
 export default function Home() {
   const [showDetails, setShowDetails] = useState<boolean[]>([]);
@@ -33,11 +33,15 @@ export default function Home() {
         {data?.ships?.map((ship, index) => {
           return (
             <>
-              <div key={index} className="flex px-4" onClick={() => toggleShowHideDetails(index)}>
+              <div key={index} className="flex px-4" onClick={async () => {
+                toggleShowHideDetails(index);
+              }}>
                 {ship?.name}
               </div>
               <div key={`ship-details-${index}`} className="flex px-4">
-                { showDetails[index] ? <ShipDetails index={index} imageSrc={ship?.image || ''} /> : <></> }
+                <div key={`ship-image-${index}`} className="flex px-4">
+                  { showDetails[index] ? <ShipDetails index={index} imageSrc={ship?.image || ''} shipId={ship.id} /> : <></> }
+                </div>
               </div>
             </>
           );
